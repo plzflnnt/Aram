@@ -1,0 +1,43 @@
+.form-container .single-item .left {
+  display: inline-block;
+  vertical-align: middle;
+}
+.form-container .single-item .left input {
+  height: 20px;
+}
+.form-container .single-item .right {
+  display: inline-block;
+  vertical-align: middle;
+}
+.form-container .single-item .right .single-item-trigger {
+  display: inline-block;
+  position: relative;
+  background-color: black;
+  width: 20px;
+  height: 20px;
+}
+.form-container .single-item .right .single-item-trigger:after, .form-container .single-item .right .single-item-trigger:before {
+  background-color: #ffffff;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: all 0.4s;
+}
+.form-container .single-item .right .single-item-trigger:before {
+  margin: -2px 0 0 -6px;
+  width: 12px;
+  height: 4px;
+}
+.form-container .single-item .right .single-item-trigger.add:after {
+  margin: -6px 0 0 -2px;
+  height: 12px;
+  width: 4px;
+}
+.form-container .single-item .right .single-item-trigger.remove:after {
+  margin: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
