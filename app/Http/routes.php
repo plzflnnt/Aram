@@ -1,5 +1,5 @@
 <?php
-use App\User;
+use Aram\User;
 //Rota para página inicial
 Route::get('/', function(){
     return View::make('auth.welcome');

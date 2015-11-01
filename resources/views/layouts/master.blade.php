@@ -56,12 +56,16 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
+@yield('div1')
 <div class="container">
 
-    <div  class="starter-template">
-        <h1 style="font-family: 'Amatic SC', cursive; font-weight: 700;">Bootstrap starter template</h1>
-        <p class="lead" >Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    <div class="row">
+        <div name="download-app" class="col-xs-12 col-sm-6 col-md-8">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, delectus quam. Consequatur cumque distinctio dolore harum nemo officiis optio, vel! Cum, ipsa, nihil! Deserunt inventore magni optio quisquam tempora temporibus.
+        </div>
+        <div name="criar-conta" class="col-xs-6 col-md-4">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis optio tempora unde? Dignissimos est fuga libero molestiae nam nemo numquam odio officia officiis quo sint, tempora tenetur totam vel veritatis.
+        </div>
     </div>
 
 </div><!-- /.container -->
@@ -77,7 +81,7 @@
 
 <div class="row">
     <div class="col-xs-1 col-md-2"></div>
-    <div name="ConteudoPrincipal" class="col-xs-4 col-md-6">@yield('div1')</div>
+    <div name="ConteudoPrincipal" class="col-xs-4 col-md-6">@yield('div2')</div>
     <div class="col-xs-1 col-md-2"></div>
 </div>
 

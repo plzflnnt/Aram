@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Aram\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Aram\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Redirect;
 

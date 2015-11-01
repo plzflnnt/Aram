@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Aram\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

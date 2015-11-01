@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: Aram
+        psr4_prefix: Aram
         src_path: app

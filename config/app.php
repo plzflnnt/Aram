@@ -141,10 +141,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Aram\Providers\AppServiceProvider::class,
+        Aram\Providers\AuthServiceProvider::class,
+        Aram\Providers\EventServiceProvider::class,
+        Aram\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
     ],
