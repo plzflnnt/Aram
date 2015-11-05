@@ -1,11 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.masterLogin')
 @section('title')
     Olá logado!
 @stop
 
 @section('div1')
 
-
+    {!! redirect('/') !!}
     @foreach($errors->all() as $error)
         <p>{!! $error !!}</p>
     @endforeach

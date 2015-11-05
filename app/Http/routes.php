@@ -5,14 +5,41 @@ Route::get('/', function(){
     return View::make('auth.welcome');
 });
 
+//Rota para criar um usuário
 Route::resource('signup','UsersController');
 
+//Rota para fazer login
 Route::resource('login','UserLoginController');
 
-//Resource para os questionários
+//Rota para criar questionario
 Route::resource('new','QuestionnaireController');
 
-// Rotas para reset pass...
+//Rota para postar JSON com as respostas
+Route::post('postJsonByToken', function(){
+//    $input = Input::get('token');
+//    $prova = DB::table('questionnaire')
+//        ->select('quest')
+//        ->where('token', $input)
+//        ->get();
+//
+//    dd($prova);
+//    return $prova;
+});
+
+//Rota para receber JSON com token na tela
+Route::get('getJsonByToken', function() {
+
+    $input = Input::get('token');
+    $prova = DB::table('questionnaire')
+        ->select('quest')
+        ->where('token', $input)
+        ->get();
+    $prova = get_object_vars($prova['0']);
+echo $prova['quest'];
+
+});
+
+// Rotas para recuperar senha
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
@@ -21,41 +48,19 @@ Route::get('password', function(){
     return View::make('auth.password');
 });
 
-//Rota para pegar JSON da prova que o token da tela
-Route::post('getJsonByToken', function(){
-
-    $input = Input::get('token');
-    $prova = DB::table('questionnaire')
-        ->select('quest')
-        ->where('token', $input)
-        ->get();
-
-    dd($prova);
-//    return $prova;
+//Documentação e ajuda
+Route::get('about', function() {
+    return View::make('help.aboutUs');
 });
-
-//Rota para receber token da tela
-Route::get('getJsonByToken', function() {
-
-    $input = Input::get('token');
-    $prova = DB::table('questionnaire')
-        ->select('quest')
-        ->where('token', $input)
-        ->get();
-
-//    dd($prova);
-    $prova = get_object_vars($prova['0']);
-echo $prova['quest'];
-//    var_dump($prova);
-//    return View::make('testeToken')->with('prova',$prova);
-});
-
-Route::get('retornaJSON',function(){
-        return View::make('teste');
-
+Route::get('ajuda', function() {
+    return View::make('help.helpOverview');
 });
 
 
+Route::get('sair', function() {
+    Auth::logout();
+    return redirect('/');
+});
 //TODO:fazer a edição dos formulários já existentes
 //TODO:não está salvando os timestamps dos questionários
 //TODO:fazer a verificação de usuário logado nas páginas internas

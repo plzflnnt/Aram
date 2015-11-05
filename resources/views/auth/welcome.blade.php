@@ -2,7 +2,19 @@
 @section('title')
     ARAM - Escola do agora!
 @stop
+@if(Auth::check())
+    {!! redirect('login/create') !!}
+@else
+@section('menu')
 
+
+
+        <ul class="nav navbar-nav">
+            <li class="active" ><a href="{!! url('/') !!}">Início</a></li>
+            <li><a href="{!! url('about') !!}">Sobre</a></li>
+            <li><a href="{!! url('ajuda') !!}">Ajuda</a></li>
+        </ul>
+@stop
 @section('div1')
     <div class="container">
 
@@ -13,7 +25,7 @@
                     <p>Responda suas provas também no seu iPhone, iPad ou Android através do aplicativo</p>
                     <p><div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Respoder <span class="caret"></span>
+                            Responder <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="#">iPhone/ iPad</a></li>
@@ -27,8 +39,8 @@
 
             <div name="criar-conta" class="col-xs-12 col-sm-5 col-md-4" style="padding: 30px;">
 
-                <h3>Cadastre-se</h3>
-                <h5>É gratis!</h5>
+                <h3>Professor</h3>
+                <h5>cadastre-se para criar sua prova.</h5>
                 <form action="{!! url('signup') !!}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
@@ -46,7 +58,7 @@
                     <button type="submit" class="btn btn-success">Criar conta</button>
                 </form>
                 <br><br>
-                <p><a href="{!!url('password') !!}">Recuperar senha esquecida</a> | <a href="#"></a>Dificuldades para usar o Aram</p>
+                <p><a href="{!!url('password') !!}">Esqueci a senha</a> | <a href="{!! url('ajuda') !!}">Preciso de ajuda</a></p>
 
 
             </div>
@@ -55,3 +67,4 @@
     </div><!-- /.container -->
 
 @stop
+@endif

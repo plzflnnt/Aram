@@ -1,9 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.masterLogin')
 @section('title')
-    Sign up to ARAM
+    ARAM
 @stop
 
-@section('div1')
+@section('div2')
 
     <form method="POST" action="/password/email">
         {!! csrf_field() !!}

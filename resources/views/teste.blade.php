@@ -1,1 +1,0 @@
- {"name":[{"tipo":"objetiva","enunciado":"","resposta":[{"alt":"on","txt":""},{"alt":"on","txt":""},{"alt":"on","txt":""},{"alt":"on","txt":""}]},{"tipo":"objetiva","enunciado":"","resposta":[{"alt":"on","txt":""}]}]}

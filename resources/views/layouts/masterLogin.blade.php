@@ -45,14 +45,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="font-family: 'Amatic SC', cursive ;">Aram app</a>
+            <a class="navbar-brand" href="{!!  url('/') !!}" style="font-family: 'Amatic SC', cursive ;">Aram app</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{!!  url('/') !!}">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+           @yield('menu')
             <form class="navbar-form navbar-right" action="{!! url('login') !!}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
@@ -61,7 +57,7 @@
                 <div class="form-group">
                     <input name="password" type="password" placeholder="Senha" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
+                <button type="submit" class="btn btn-success">Entrar</button>
 
             </form>
         </div><!--/.nav-collapse -->
@@ -69,8 +65,11 @@
     </div>
 </nav>
 
+{{--Corpo personalizável--}}
 @yield('div1')
 
+
+{{--Estilo padrão--}}
 <div class="row">
     <div class="col-xs-1 col-md-2"></div>
     <div name="ConteudoPrincipal" class="col-xs-4 col-md-6">@yield('div2')</div>

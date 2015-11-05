@@ -9,7 +9,7 @@ var contAlt = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 function createQuest(){
     if(document.getElementById('discursiva').checked) {
 
-        var appd = $('<div class="q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
+        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
         $(".quest").append(appd);
         cont++;
 
@@ -18,7 +18,7 @@ function createQuest(){
 
     else if(document.getElementById('objetiva').checked) {
 
-        var appd = $('<div class="q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"><label><input type="checkbox" name="'+cont+'alternativa1checkbox"> Alternativa 1 </label><input type="text" class="form-control" name="'+cont+'alternativa1texto"></div></div>');
+        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"><label><input type="checkbox" name="'+cont+'alternativa1checkbox"> Alternativa 1 </label><input type="text" class="form-control" name="'+cont+'alternativa1texto"></div></div>');
         $(".quest").append(appd);
         cont++;
     }

@@ -6,15 +6,19 @@
     <link rel="stylesheet" href="../../css/styleForm.css">
 @stop
 
-@section('container')
+@section('div1')
 
 
-{!! $id !!}
-
+    {!! $id !!}
+ <br><br>
+    @foreach($prova as $questao)
+        <p class="inputQ" style=" display: none">{!! $questao !!}</p><br>
+    @endforeach
+    {{--<button onclick="restoreQuestions()">oi</button>--}}
 
 
     {{--seleciona o tipo de questão--}}
-    <div class="radio col-md-6">
+    <div class="radio">
         <label>
             <input type="radio" name="optionsRadios" id="discursiva" value="option1" checked>
             Discursiva
@@ -25,24 +29,24 @@
         </label>
     </div>
 
-    <button class="btn btn-default col-md-2" onclick="createQuest()" >Nova</button>
-<br><br>
-<div class="quest">
+    <button class="btn btn-default" onclick="createQuest()" >Nova</button>
+
+    <div class="quest">
 
 
-</div>
+    </div>
 
     {{--formulário aram--}}
 
     {!!Form::open(array('url'=>'new/'.$id, 'method' => 'PUT', 'id'=> 'qid'))!!}
 
-<input type="hidden" name="questions">
+    <input type="hidden" name="questions">
 
     {{--enviar--}}
 
-{{--<button type="button" onclick="makeJSON()">json</button>--}}
+    {{--<button type="button" onclick="makeJSON()">json</button>--}}
     <p>
-        <button type="submit" onclick="makeJSON()" class="btn btn-default col-md-12"><span class="glyphicon glyphicon-floppy-disk"></span>  Salvar</button>
+        <button type="submit" onclick="makeJSON()" class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk"></span>  Salvar</button>
     </p>
 
 
@@ -51,7 +55,7 @@
 
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 
-    <script src="../../js/questionnaire.js"></script>
+    <script src="../../js/questionnaireModify.js"></script>
 
 @stop
 

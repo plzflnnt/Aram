@@ -1,51 +1,53 @@
-@extends('layouts.master')
+@extends('layouts.masterUser')
 @section('title')
-oi
+Olá {!! Auth::user() -> name !!}
 @stop
 
-@section('div1')
-   @if(Auth::check())
+@section('menu')
+    <ul class="nav navbar-nav">
+        <li class="active" ><a href="{!! url('/') !!}">Minhas provas</a></li>
+        <li><a href="{!! url('new') !!}">Criar Prova</a></li>
+        <li><a href="{!! url('#') !!}">Repositório de provas</a></li>
+        <li><a href="{!! url('sair') !!}">Sair</a><ali>
+        <li><h4 class="btn btn-default">Olá {!! Auth::user() -> name  !!}</h4></li>
+    </ul>
+@stop
 
+@section('container')
+    @if(Auth::check())
 
-   <p> Logado como: {!! Auth::user() -> name  !!}</p>
-
-id do usuário:{!! $id = Auth::user() -> id !!}
-<br><br><br>
-
-
-IMPRIME AS PROVAS DESTE USUÁRIO <br>
-   <a href=""></a><?php $provas = DB::table('questionnaire')
-                     ->select('*')
-                     ->where('user_id', $id)
-                     ->get();
-
-
-
-        foreach($provas as $prova){
-            echo $prova->name; ?><br><br><?php
-        }
-?>
-{{--cria nova prova--}}
-   <a href="{!! url('new') !!}" class="btn btn-default">Nova prova</a>
+        <p class="row"></p>
+<div class="well">
 
 
 
+        <div class="panel panel-default list-group-item-heading">
+            <p class="panel-heading">Minhas provas</p>
+
+            <div class="">
+           <?php
+               foreach($provas as $prova){
+               $prova = get_object_vars($prova);
+               ?><div class="list-group-item">
+
+                       <div class="row">
+                           <div class="col-xs-5"><p class=""><?php echo $prova['name'];?></p></div>
+                           <div class="col-xs-4"><p class=""><?php echo $prova['token'];?></p></div>
+                           <div class="col-xs-1"><button class="glyphicon glyphicon-adjust btn btn-default">Editar</button></div>
+                           <div class="col-xs-1"><button class="glyphicon glyphicon-remove btn btn-default">Excluir</button></div></div></div> <?php
+               } ?>
+
+           <div class="col-md-12 text-center">{!! $provas->render() !!}</div>
+            </div>
+        </div>
 
 
-   {!!Form::open(array('url'=>'login/'.$id , 'method' => 'DELETE'))!!}
-
-   <div class="col-lg-2">
-      <p>
-         <button class="btn btn-default">Sair</button>
-      </p>
-      </div>
-      {!!Form::close()!!}
-      <br>
 
 
+</div>
    @else
 
-      {!! redirect('login') !!}
+      {!! redirect('/') !!}
 
    @endif
 @stop

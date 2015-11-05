@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+        <title>Em manutenção.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,8 +40,10 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">Estamos trabalhando loucamente para voltar ao normal</div>
+                <br><div class="title">;)</div>
             </div>
+            <p></p>
         </div>
     </body>
 </html>

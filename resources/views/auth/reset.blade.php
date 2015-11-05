@@ -1,8 +1,14 @@
-@extends('layouts.master')
+@extends('layouts.masterLogin')
 @section('title')
-    Sign up to ARAM
+    ARAM - Escola do agora!
 @stop
-
+@section('menu')
+    <ul class="nav navbar-nav">
+        <li class="active" ><a href="{!! url('/') !!}">Início</a></li>
+        <li><a href="{!! url('about') !!}">Sobre</a></li>
+        <li><a href="#contact">Ajuda</a></li>
+    </ul>
+@stop
 @section('div1')
 
     <form method="POST" action="/password/reset">

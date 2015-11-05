@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -37,7 +38,15 @@ class UserLoginController extends Controller
     public function create()
     {
 
-        return View::make('auth.userHome');
+        $id = Auth::user() -> id;
+        $provas = DB::table('questionnaire')
+//            ->select('name')
+            ->where('user_id', $id)
+//            ->get()
+            ->paginate(6);
+
+
+        return View::make('auth.userHome')->withProvas($provas);
     }
 
     /**
@@ -121,8 +130,6 @@ class UserLoginController extends Controller
         return Redirect::to('login');
     }
 
-    public function logout(){
 
-    }
 
 }

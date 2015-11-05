@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterLogin')
 @section('title')
     Sign up to ARAM
 @stop

@@ -51,7 +51,7 @@ class questionnaireController extends Controller
                 'token' => $token,
                 'user_id' => $id,
                 'public' => true,
-                'quest' => 1,
+                'quest' => "sv",
             ]
         );
         return Redirect::to('new/'.$token.'/edit');
@@ -64,7 +64,28 @@ class questionnaireController extends Controller
 
     public function edit($id)
     {
-        return View::make('questionnaire.questionEdit')->with('id',$id);
+
+        //teste se a prova já existe
+//return $id;
+        $test = DB::table('questionnaire')
+            ->select('quest')
+            ->where('token',$id)
+            ->get();
+        $test = get_object_vars($test['0']);
+//        return var_dump($test["quest"]);
+
+        if ($test["quest"]=="1")
+        return View::make('questionnaire.questionEdit')->withId($id);
+        else
+            $uid = Auth::user() -> id;
+        $prova = DB::table('questionnaire')
+            ->select('quest')
+            ->where('user_id', $uid)
+            ->where('token', $id)
+            ->get();
+        $prova = get_object_vars($prova['0']);
+//        $prova = json_decode($prova['quest']);
+            return View::make('questionnaire.questionModify')->withId($id)->withProva($prova);
     }
 
     public function update(Request $request, $id)
