@@ -45,8 +45,19 @@ class AnswerController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-        return $input['token'];
-        //TODO: PEGAR ESTE TOKEN E RETORNAR A DEVIDA PROVA PARA SER RESPONDIDA
+//        var_dump($input);
+        try{
+            $test = DB::table('questionnaire')
+                ->select('quest')
+                ->where('token',$input['token'])
+                ->get();
+            $test = get_object_vars($test['0']);
+    //        var_dump($test);
+            return View::make('answer/newAnswer')->withTest($test['quest'])->withToken($input['token']);
+        }catch (\Exception $e){
+            $erro = "Token inválido";
+            return Redirect::to('responder')->withErrors($erro);
+        }
     }
 
     /**
@@ -80,7 +91,7 @@ class AnswerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "ok";
     }
 
     /**

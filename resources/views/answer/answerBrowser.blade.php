@@ -23,5 +23,9 @@
         </div><!-- /input-group -->
         {!! Form::close() !!}
     </div><!-- /.col-lg-6 -->
+    @foreach($errors->all() as $error)
+        <div class="alert alert-warning" role="alert">{!! $error !!}</div>
+    @endforeach
+
 
 @stop

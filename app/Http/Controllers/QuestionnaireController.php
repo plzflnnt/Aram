@@ -63,7 +63,9 @@ class questionnaireController extends Controller
             ->select('quest')
             ->where('token',$id)
             ->get();
-        return $test;
+        $test = get_object_vars($test['0']);
+        return View::make('questionnaire.visualizeQuestionnaire')->withTest($test);
+
         //botão de voltar
        // <input action="action" type="button" value="Back" onclick="history.go(-1);" />
 

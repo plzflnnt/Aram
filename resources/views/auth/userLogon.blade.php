@@ -32,12 +32,12 @@
     <a href="{!!url('password') !!}">Esqueci a senha</a>  |
     <a href="{!!url('signup') !!}">Criar Conta</a>
 
-    <h1>Usuários</h1>
-    @foreach($users as $pessoa)
+    {{--<h1>Usuários</h1>--}}
+    {{--@foreach($users as $pessoa)--}}
 
-        <p>{!! $pessoa -> name !!}</p>
+        {{--<p>{!! $pessoa -> name !!}</p>--}}
 
-    @endforeach
+    {{--@endforeach--}}
 
 
 

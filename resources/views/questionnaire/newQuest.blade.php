@@ -20,7 +20,6 @@
         </p>
         {!!Form::close()!!}
     </div>
-    <a href="{!! url('help.login') !!}">vjgvhgbghjjhbn</a>
 
 @stop
 
