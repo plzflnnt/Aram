@@ -14,12 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 
-
-
-class UserLoginController extends Controller
+class AnswerController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +23,7 @@ class UserLoginController extends Controller
      */
     public function index()
     {
-        return View::make('auth.welcome')->withUsers(User::all());
+        return View::make('answer.answerBrowser');
     }
 
     /**
@@ -37,17 +33,7 @@ class UserLoginController extends Controller
      */
     public function create()
     {
-
-        $id = Auth::user() -> id;
-        $provas = DB::table('questionnaire')
-//            ->select('name')
-            ->where('user_id', $id)
-//            ->get()
-            ->paginate(6);
-
-
-
-        return View::make('auth.userHome')->withProvas($provas);
+        //
     }
 
     /**
@@ -58,31 +44,9 @@ class UserLoginController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'email' => 'required|exists:users',
-                        'password' => 'required'
-
-        );
-
-        $validator = Validator::make($request->input(), $rules);
-
-        if($validator->fails()) return Redirect::to('login')
-            ->withInput(Input::except('password'))
-            ->withErrors($validator);
-
-
-
-        $credenciais = array(
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        );
-        if(Auth::attempt($credenciais)){
-            $request=null;
-            return Redirect::intended('login/create');
-        }
-        else{
-            return Redirect::to('login')->withInput();
-        }
+        $input = Input::all();
+        return $input['token'];
+        //TODO: PEGAR ESTE TOKEN E RETORNAR A DEVIDA PROVA PARA SER RESPONDIDA
     }
 
     /**
@@ -127,10 +91,6 @@ class UserLoginController extends Controller
      */
     public function destroy($id)
     {
-        Auth::logout();
-        return Redirect::to('login');
+        //
     }
-
-
-
 }

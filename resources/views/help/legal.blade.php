@@ -12,7 +12,7 @@
 
 @section('div2')
 
-    <h1>Tópicos de ajuda:</h1>
-    <h2>Primeiramente...</h2>
+
+    <h1>Sobre a parte de privacidade do Aram...</h1>
 
 @stop

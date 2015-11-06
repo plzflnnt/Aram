@@ -36,7 +36,7 @@ function createQuestDisc(valueDisc){
 
 
 function createQuestObj(valueObj){
-    var appd = $('<div class="q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" value="'+valueObj+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"><label><input type="checkbox" name="'+cont+'alternativa1checkbox"> Alternativa 1 </label><input type="text" class="form-control" name="'+cont+'alternativa1texto"></div></div>');
+    var appd = $('<div class="q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" value="'+valueObj+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"></div></div>');
     $(".quest").append(appd);
     cont++;
 }
@@ -58,6 +58,14 @@ function addAlt(add){
     var classe = (".checkbox"+add);
     $(classe).prepend(appd);
 
+}
+
+function createAlternativa(valueAlt,add,valueCbx){
+    contAlt[add]++;
+    var appd = "";
+    appd = $('<div class="checkbox'+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox" checked="'+valueCbx+'"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" value="'+valueAlt+'" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+contAlt[add]+')" >Remover alternativa</button></div>');
+    var classe = (".checkbox"+add);
+    $(classe).prepend(appd);
 }
 
 
@@ -89,13 +97,22 @@ function makeJSON(){
 function restoreQuestions(){
     var nudeTest = $('.inputQ').text();
     var jsonTest = JSON.parse(nudeTest);
-    for (var i = 0; i < jsonTest.name.length; i++){
-        if (jsonTest.name[i].tipo == "objetiva"){
-            var retorno = jsonTest.name[i].enunciado;
+    for (var i = 0; i < jsonTest.test.length; i++){
+        if (jsonTest.test[i].tipo == "objetiva"){
+            var retorno = jsonTest.test[i].enunciado;
             createQuestObj(retorno);
+            var numDeAlternativas = jsonTest.test[i].resposta.length;
+            for (var y = 0; y < numDeAlternativas; y++){
+                var retornoAlt = jsonTest.test[i].resposta[y].txt;
+                var retornoCbx = jsonTest.test[i].resposta[y].alt;
+                //alert(y)
+                //alert(jsonTest.test[i].resposta[y].alt);
+                //alert(jsonTest.test[i].resposta[y].txt);
+                createAlternativa(retornoAlt,i+1,retornoCbx);
+            }
 
         }else{
-            var retorno = jsonTest.name[i].enunciado;
+            var retorno = jsonTest.test[i].enunciado;
             createQuestDisc(retorno);
         }
     }

@@ -2,6 +2,9 @@
 use Aram\User;
 //Rota para página inicial
 Route::get('/', function(){
+    if (Auth::check()) {
+        return Redirect::to('login/create');
+    }
     return View::make('auth.welcome');
 });
 
@@ -39,6 +42,9 @@ echo $prova['quest'];
 
 });
 
+//Rota para responder online
+Route::resource('responder','AnswerController');
+
 // Rotas para recuperar senha
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
@@ -55,15 +61,32 @@ Route::get('about', function() {
 Route::get('ajuda', function() {
     return View::make('help.helpOverview');
 });
+Route::get('legal', function() {
+    return View::make('help.legal');
+});
+Route::get('legal', function() {
+    return View::make('help.legal');
+});
+
+//Configuração de usuário
+Route::get('setup', function() {
+    return View::make('auth.userSetup');
+});
 
 
+
+//logout
 Route::get('sair', function() {
     Auth::logout();
     return redirect('/');
 });
+
+
 //TODO:fazer a edição dos formulários já existentes
 //TODO:não está salvando os timestamps dos questionários
 //TODO:fazer a verificação de usuário logado nas páginas internas
 //TODO:fazer os layouts das paginas em que o a pessoa está logada e não está
 //TODO: na página newQuest fazer uma instrução de como criar um formulário
 //TODO: arrumar ROUTES  pois o app só faz requisição GET
+
+//TODO: ao salvar o questionário todas ficam como corretas e a ultima alternativa da questão objetiva fica duplicada e some a pimeira

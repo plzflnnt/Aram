@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -22,7 +23,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        return View::make('auth.signup');
+        return View::make('auth.welcome');
     }
 
     /**
@@ -106,6 +107,12 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $user = User::find($id);
+        $user -> delete();
+//        DB::table('user')
+//            ->where('id',$id)
+//            ->delete();
+        return Redirect::to('/');
     }
 }

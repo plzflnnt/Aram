@@ -2,9 +2,7 @@
 @section('title')
     ARAM - Escola do agora!
 @stop
-@if(Auth::check())
-    {!! redirect('login/create') !!}
-@else
+
 @section('menu')
 
 
@@ -31,11 +29,12 @@
                             <li><a href="#">iPhone/ iPad</a></li>
                             <li><a href="#">Android</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Responder agora</a></li>
+                            <li><a href="{!! url('responder') !!}">Responder agora</a></li>
                         </ul>
                     </div></p>
                 </div>
             </div>
+            <div class="col-xs-12 visible-xs-block glyphicon-align-center"><span class="glyphicon-align-center glyphicon glyphicon-chevron-down"></span></div>
 
             <div name="criar-conta" class="col-xs-12 col-sm-5 col-md-4" style="padding: 30px;">
 
@@ -67,4 +66,4 @@
     </div><!-- /.container -->
 
 @stop
-@endif
+

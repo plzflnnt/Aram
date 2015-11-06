@@ -19,7 +19,7 @@ class questionnaireController extends Controller
 
     public function index()
     {
-        return View::make('questionnaire.new');
+        return Redirect::to('login/create');
     }
 
     public function create()
@@ -30,7 +30,7 @@ class questionnaireController extends Controller
     public function store(Request $request)
     {
 
-
+        //CRIA UM TOKEN PARA A PROVA
         $id = Auth::id();
         $tokenCru = uniqid(rand(), true);
         $token = dechex($tokenCru);
@@ -59,22 +59,28 @@ class questionnaireController extends Controller
 
     public function show($id)
     {
-        //
+        $test = DB::table('questionnaire')
+            ->select('quest')
+            ->where('token',$id)
+            ->get();
+        return $test;
+        //botão de voltar
+       // <input action="action" type="button" value="Back" onclick="history.go(-1);" />
+
     }
 
     public function edit($id)
     {
 
         //teste se a prova já existe
-//return $id;
+
         $test = DB::table('questionnaire')
             ->select('quest')
             ->where('token',$id)
             ->get();
         $test = get_object_vars($test['0']);
-//        return var_dump($test["quest"]);
 
-        if ($test["quest"]=="1")
+        if ($test["quest"]=="sv") //não existe
         return View::make('questionnaire.questionEdit')->withId($id);
         else
             $uid = Auth::user() -> id;
@@ -84,16 +90,19 @@ class questionnaireController extends Controller
             ->where('token', $id)
             ->get();
         $prova = get_object_vars($prova['0']);
-//        $prova = json_decode($prova['quest']);
             return View::make('questionnaire.questionModify')->withId($id)->withProva($prova);
     }
 
     public function update(Request $request, $id)
     {
+        $nomeDaProva = DB::table('questionnaire')
+                        ->select('name')
+                        ->where('token',$id)
+                        ->get();
+        $nomeDaProva = get_object_vars($nomeDaProva['0']);
+
         $input = Input::get('questions');
-
-
-$input = " {\"name\":". $input."}";
+        $input = " {\"name\":\"".$nomeDaProva['name']."\",\"test\":". $input."}";
 
         $userId = Auth::id();
         DB::table('questionnaire')
@@ -105,9 +114,10 @@ $input = " {\"name\":". $input."}";
 
     public function destroy($id)
     {
-        //
+        DB::table('questionnaire')
+            ->where('token',$id)
+            ->delete();
+        return Redirect::to('login/create');
+
     }
 }
-
-
-//TODO : trazer a logica de banco das provas da view home dos usuários pra ca
