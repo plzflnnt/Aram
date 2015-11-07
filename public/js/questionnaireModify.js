@@ -9,7 +9,7 @@ $(document).ready(function(){ restoreQuestions()})
 function createQuest(){
     if(document.getElementById('discursiva').checked) {
 
-        var appd = $('<div class="well q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
+        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
         $(".quest").append(appd);
         cont++;
 
@@ -28,7 +28,7 @@ function createQuest(){
 
 
 function createQuestDisc(valueDisc){
-        var appd = $('<div class="well q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" value="'+valueDisc+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
+        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" value="'+valueDisc+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
         $(".quest").append(appd);
         cont++;
 }
@@ -36,7 +36,7 @@ function createQuestDisc(valueDisc){
 
 
 function createQuestObj(valueObj){
-    var appd = $('<div class="well q'+cont+'"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" value="'+valueObj+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"></div></div>');
+    var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" value="'+valueObj+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"></div></div>');
     $(".quest").append(appd);
     cont++;
 }
@@ -61,11 +61,23 @@ function addAlt(add){
 }
 
 function createAlternativa(valueAlt,add,valueCbx){
-    contAlt[add]++;
-    var appd = "";
-    appd = $('<div class="checkbox'+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox" checked="'+valueCbx+'"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" value="'+valueAlt+'" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+contAlt[add]+')" >Remover alternativa</button></div>');
-    var classe = (".checkbox"+add);
-    $(classe).prepend(appd);
+
+    if(valueCbx==true){
+        contAlt[add]++;
+        var appd = "";
+        appd = $('<div class="checkbox'+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox" checked="'+valueCbx+'"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" value="'+valueAlt+'" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+contAlt[add]+')" >Remover alternativa</button></div>');
+        var classe = (".checkbox"+add);
+        $(classe).prepend(appd);
+    }else{
+        contAlt[add]++;
+        var appd = "";
+        appd = $('<div class="checkbox'+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" value="'+valueAlt+'" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+contAlt[add]+')" >Remover alternativa</button></div>');
+        var classe = (".checkbox"+add);
+        $(classe).prepend(appd);
+    }
+
+
+
 }
 
 
@@ -83,9 +95,9 @@ function makeJSON(){
         var quest = $(this).find("input[name$='enunciado']").val()
         var ans = [];
         $(this).find("div[class^='checkbox']").each(function(i){
-            if(i > 0) {
+            if(i > 0){
                 var that = this;
-                var check = $(that).find("input[name$='checkbox']").val();
+                var check =  $(that).find("input[name$='checkbox']").is(':checked');
                 var text = $(that).find("input[name$='texto']").val();
                 ans.push({"alt": check, "txt": text});
             }
@@ -117,7 +129,6 @@ function restoreQuestions(){
     }
 
 
-    //TODO: ja retorna tudo menos as alternativas e fazer a funcão ser executada assim que a pagina carregar
 
 
 }

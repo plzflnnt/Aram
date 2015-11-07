@@ -1,6 +1,6 @@
 @extends('layouts.masterLogin')
 @section('title')
-    Aram App. Sobre nós
+    Aram App
 @stop
 @section('menu')
     <ul class="nav navbar-nav">
@@ -33,8 +33,10 @@
                     </div>
                     <div class="modal-footer">
                         {!!  Form::open(array('url' => 'responder/'.$token, 'method' => 'PUT', 'name' => 'test'))  !!}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                         <p>
-                            <button type="submit" onclick="answerTest()" class="btn btn-default col-md-12"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+                            <button type="submit" onclick="answerTest()" class="btn btn-default col-md-12"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </p>
                         {!! Form::close() !!}
                     </div>

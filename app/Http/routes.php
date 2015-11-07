@@ -88,5 +88,3 @@ Route::get('sair', function() {
 //TODO:fazer os layouts das paginas em que o a pessoa está logada e não está
 //TODO: na página newQuest fazer uma instrução de como criar um formulário
 //TODO: arrumar ROUTES  pois o app só faz requisição GET
-
-//TODO: ao salvar o questionário todas ficam como corretas e a ultima alternativa da questão objetiva fica duplicada e some a pimeira

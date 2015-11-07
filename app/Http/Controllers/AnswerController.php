@@ -45,14 +45,12 @@ class AnswerController extends Controller
     public function store(Request $request)
     {
         $input = Input::all();
-//        var_dump($input);
         try{
             $test = DB::table('questionnaire')
                 ->select('quest')
                 ->where('token',$input['token'])
                 ->get();
             $test = get_object_vars($test['0']);
-    //        var_dump($test);
             return View::make('answer/newAnswer')->withTest($test['quest'])->withToken($input['token']);
         }catch (\Exception $e){
             $erro = "Token inválido";

@@ -29,8 +29,4 @@ function exibe(){
         }
     }
 
-
-    //TODO: ja retorna tudo menos as alternativas e fazer a funcão ser executada assim que a pagina carregar
-
-
 }

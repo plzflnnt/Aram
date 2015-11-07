@@ -1,6 +1,6 @@
 @extends('layouts.masterLogin')
 @section('title')
-    Aram App. Sobre nós
+    Aram App
 @stop
 @section('menu')
     <ul class="nav navbar-nav">
