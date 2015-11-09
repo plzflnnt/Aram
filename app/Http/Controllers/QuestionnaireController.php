@@ -76,6 +76,7 @@ class questionnaireController extends Controller
 
         //teste se a prova já existe
 
+
         $test = DB::table('questionnaire')
             ->select('quest')
             ->where('token',$id)

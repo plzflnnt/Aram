@@ -36,18 +36,17 @@ function delQuest(del) {
 
 
 function addAlt(add){
-
     contAlt[add]++;
-    var appd = $('<div class="checkbox'+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox" checked="false"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+contAlt[add]+')" ><span class="glyphicon glyphicon-trash"></span></button></div>');
+    var appd = $('<div class="'+add+' checkbox '+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+add+','+contAlt[add]+')" >Remover alternativa</button></div>');
     var classe = (".checkbox"+add);
     $(classe).prepend(appd);
 
 }
 
 
-function delAlt(del){
+function delAlt(q, a){
 
-    var toDel = (".checkbox" + del);
+    var toDel = ("." + q + " checkbox " + a);
     $(toDel).remove();
 
 }
@@ -58,13 +57,11 @@ function makeJSON(){
         var type = $(this).find("input[name$='tipo']").val();
         var quest = $(this).find("input[name$='enunciado']").val()
         var ans = [];
-        $(this).find("div[class^='checkbox']").each(function(i){
-            if(i > 0){
+        $(this).find("div[class~='checkbox']").each(function(){
             var that = this;
             var check =  $(that).find("input[name$='checkbox']").is(':checked');
             var text = $(that).find("input[name$='texto']").val();
             ans.push({"alt": check, "txt": text});
-            }
         });
         questions.push({"tipo": type,"enunciado": quest,"resposta":ans});
     });
