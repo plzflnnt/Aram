@@ -16,32 +16,16 @@ use Illuminate\Support\Facades\DB;
 
 class AnswerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return View::make('answer.answerBrowser');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $input = Input::all();
@@ -51,53 +35,98 @@ class AnswerController extends Controller
                 ->where('token',$input['token'])
                 ->get();
             $test = get_object_vars($test['0']);
-            return View::make('answer/newAnswer')->withTest($test['quest'])->withToken($input['token']);
+            return View::make('answer/newAnswer')->withProva($test)->withToken($input['token']);
         }catch (\Exception $e){
             $erro = "Token inválido";
             return Redirect::to('responder')->withErrors($erro);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        return "ok";
+        //prova
+        $input = Input::get('questions');
+        $input = " {\"test\":". $input."}";
+
+        //token da prova
+        $token = Input::get('token');
+
+        //chave estrangeira da resposta
+        $question_id = DB::table('questionnaire')
+            ->select('id')
+            ->where('token', $token)
+            ->get();
+        $question_id = get_object_vars($question_id['0']);
+
+        //prova original com resposta
+        $test_ans = DB::table('questionnaire')
+            ->select('quest')
+            ->where('token', $token)
+            ->get();
+        $test_ans = get_object_vars($test_ans['0']);
+        $test_ans = $test_ans["quest"];
+
+        $i = 0;
+
+        //correção
+        $resposta = json_decode($input);
+        $respostaMatriz = json_decode($test_ans);
+
+        foreach($resposta->test as $ans){
+            $ans = get_object_vars($ans);
+            $ansC = get_object_vars($respostaMatriz);
+            $ansC = $ansC['test'];
+            $ansC = get_object_vars($ansC[$i]);
+            $i++;
+
+            if($ansC['tipo'] == "objetiva") {
+                if ($ans['tipo'] == "objetiva") {
+                    //entra nas perguntas objetivas
+
+
+                    foreach ($ans['resposta'] as $alternativa) {
+                        $alternativa = get_object_vars($alternativa);//o identificador é de cada alternativa
+                    echo $alternativa['txt'];
+                        ?><br> <?php
+                        var_dump($ansC);
+                        ?><br> <?php
+                        //chegou nas alternativas!
+
+
+                    }
+                }
+            }
+        }
+
+
+
+        //nome do cliente
+        $nomeDoAluno = Input::get('fname');
+
+        //salva a resposta no banco
+//        DB::table('answers')->insert(
+//            [
+//                'question_id' => $question_id['id'],
+//                'name' => $nomeDoAluno,
+//                'answers' => $input,
+//                'score' => $score,
+//            ]
+//        );
+//        return View::make('answer.ready');
+//        return 'oi';
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

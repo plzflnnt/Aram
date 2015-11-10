@@ -89,3 +89,4 @@ Route::get('sair', function() {
 //TODO: na página newQuest fazer uma instrução de como criar um formulário
 //TODO: arrumar ROUTES  pois o app só faz requisição GET
 //TODO: prova ativa para responder ou não
+//TODO: aspas duplas estragam a prova

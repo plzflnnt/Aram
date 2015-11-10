@@ -1,59 +1,86 @@
 /**
- * Created by paulo on 06/11/15.
+ * Created by paulo on 11/10/15.
  */
-$(document).ready(function(){ answerTest()})
+var cont = 1;
+var contAlt = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
+$(document).ready(function(){ restoreQuestions()})
 
-function answerTest(){
+function validateForm() {
+    var x = document.forms["qid"]["fname"].value;
+    if (x == null || x == "") {
+        alert("Ops! Não pode enviar uma prova sem nome.");
+        return false;
+    }
+}
 
+function createQuestDisc(valueDisc){
+    var appd = $('<div class="q'+cont+' well"><div class=" resposta form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><h3 name="'+cont+'enunciado">'+valueDisc+'</h1><input type="text" class="form-control" name="resposta" value=""></div>');
+    $(".quest").append(appd);
+    cont++;
+}
 
-    var nudeTest = $('.inputQ').text();
-    var jsonTest = JSON.parse(nudeTest);
+function createQuestObj(valueObj){
+    var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><h3 name="'+cont+'enunciado">'+valueObj+'</h1><div class="checkbox'+cont+'"></div></div>');
+    $(".quest").append(appd);
+    cont++;
+}
 
-    $(".test").append(jsonTest.name+"<br>");
+function createAlternativa(valueAlt,add,valueCbx){
 
+        contAlt[add]++;
+        var appd = $('<div class="row"><div class="col-lg-12"><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="checkbox" aria-label="..."></span><p class="form-control" name="texto" aria-label="...">'+valueAlt+'</p></div><!-- /input-group --></div>');
+        var classe = (".checkbox"+add);
+        $(classe).prepend(appd);
+}
+
+function makeJSON(){
+    var questions = [];
+    $(".quest > div[class^='q']").each(function(){
+        var type = $(this).find("input[name$='tipo']").val();
+        var quest = $(this).find("h3[name$='enunciado']").text()
+        var ans = [];
+        if (type==="discursiva"){
+            $(this).find("div[class~='resposta']").each(function(){
+                var that = this;
+                var resp =  $(that).find("input[name$='resposta']").val();
+                questions.push({"tipo": type,"enunciado": quest,"resposta":resp});
+            });
+        }else{
+            $(this).find("div[class^='row']").each(function(){
+                var that = this;
+                var check =  $(that).find("input[name$='checkbox']").is(':checked');
+                var text = $(that).find("p[name$='texto']").text();
+                ans.push({"alt": check, "txt": text});
+            });
+            questions.push({"tipo": type,"enunciado": quest,"resposta":ans});
+        }
+    });
+    oFormObject = document.forms['qid'];
+    oFormObject.elements["questions"].value = JSON.stringify(questions);//;
+}
+
+function restoreQuestions(){
+    var stringTest = $('.inputQ').text();
+    var jsonTest = JSON.parse(stringTest);
     for (var i = 0; i < jsonTest.test.length; i++){
         if (jsonTest.test[i].tipo == "objetiva"){
-
             var retorno = jsonTest.test[i].enunciado;
-            $(".test").append(retorno+"<br>");
+            createQuestObj(retorno);
             var numDeAlternativas = jsonTest.test[i].resposta.length;
             for (var y = 0; y < numDeAlternativas; y++){
-
-                $(".test").append(jsonTest.test[i].resposta[y].txt+"<br>");
-                $(".test").append(jsonTest.test[i].resposta[y].alt+"<br>");
+                var retornoAlt = jsonTest.test[i].resposta[y].txt;
+                var retornoCbx = jsonTest.test[i].resposta[y].alt;
+                createAlternativa(retornoAlt,i+1,retornoCbx);
             }
 
         }else{
-
             var retorno = jsonTest.test[i].enunciado;
-            $(".test").append(retorno+"<br>");
-
+            createQuestDisc(retorno);
         }
     }
 
 
-}
 
-function makeJSON(){
-    //var questions = [];
-    //$(".quest > div[class^='q']").each(function(){
-    //    var type = $(this).find("input[name$='tipo']").val();
-    //    var quest = $(this).find("input[name$='enunciado']").val()
-    //    var ans = [];
-    //    $(this).find("div[class^='checkbox']").each(function(i){
-    //        if(i > 0){
-    //            var that = this;
-    //            var check =  $(that).find("input[name$='checkbox']").val();
-    //            alert(check);
-    //            var text = $(that).find("input[name$='texto']").val();
-    //            ans.push({"alt": check, "txt": text});
-    //        }
-    //    });
-    //    questions.push({"tipo": type,"enunciado": quest,"resposta":ans});
-    //});
-    //oFormObject = document.forms['qid'];
-    //oFormObject.elements["questions"].value = JSON.stringify(questions);//;
 
-    alert("oi");
 }

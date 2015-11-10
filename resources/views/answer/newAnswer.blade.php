@@ -6,15 +6,20 @@
     <ul class="nav navbar-nav">
         <li><a href="{!! url('/') !!}">Início</a></li>
         <li><a href="{!! url('about') !!}">Sobre</a></li>
-        <li class="active"><a href="#contact">Ajuda</a></li>
+        <li><a href="{!! url('ajuda') !!}">Ajuda</a></li>
     </ul>
 @stop
 
 @section('div2')
 
-    <p class="inputQ" style=" display: none">{!! $test !!}</p><br>
 
-    <div class="test"></div>
+    @foreach($prova as $questao)
+        <p class="inputQ" style=" display: none">{!! $questao !!}</p><br>
+    @endforeach
+    <div class="quest">
+
+
+    </div>
 
 
 
@@ -32,11 +37,15 @@
                         Convirmar envio?
                     </div>
                     <div class="modal-footer">
-                        {!!  Form::open(array('url' => 'responder/'.$token, 'method' => 'PUT', 'name' => 'test'))  !!}
+                        {!!  Form::open(array('url' => 'responder/'.$token, 'method' => 'PUT', 'name' => 'qid', 'onsubmit'=>'return validateForm()'))  !!}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <p>
-                            <button type="submit" onclick="answerTest()" class="btn btn-default col-md-12"><span class="glyphicon glyphicon-send"></span> Enviar</button>
+                            <input type="text" class="form-control" placeholder="Nome" name="fname">
+                            <input type="text" class="form-control" placeholder="Informaçoes extras. Ex.: Turma, série, etc...">
+                            <input type="hidden" name="token" value="{!! $token !!}">
+                            <input type="hidden" name="questions">
+                            <button type="submit" onclick="makeJSON()" class="oi btn btn-default col-md-12"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </p>
                         {!! Form::close() !!}
                     </div>

@@ -14,7 +14,6 @@ MODIFICA
     @foreach($prova as $questao)
         <p class="inputQ" style=" display: none">{!! $questao !!}</p><br>
     @endforeach
-    {{--<button onclick="restoreQuestions()">oi</button>--}}
 
 
     {{--seleciona o tipo de questão--}}

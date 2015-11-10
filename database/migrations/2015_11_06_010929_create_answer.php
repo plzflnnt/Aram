@@ -18,6 +18,7 @@ class CreateAnswer extends Migration
             $table->foreign('question_id')->references('id')->on('questionnaire')->onDelete('cascade');
             $table->string('name');
             $table->integer('answers');
+            $table->integer('score');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateAnswer extends Migration
      */
     public function down()
     {
-        Schema::drop('questionnaire');
+        Schema::drop('answer');
     }
 }

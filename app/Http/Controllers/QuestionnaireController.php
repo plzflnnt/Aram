@@ -66,9 +66,6 @@ class questionnaireController extends Controller
         $test = get_object_vars($test['0']);
         return View::make('questionnaire.visualizeQuestionnaire')->withTest($test);
 
-        //botão de voltar
-       // <input action="action" type="button" value="Back" onclick="history.go(-1);" />
-
     }
 
     public function edit($id)
