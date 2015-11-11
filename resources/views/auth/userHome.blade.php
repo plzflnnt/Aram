@@ -15,15 +15,33 @@ Olá {!! Auth::user() -> name !!}
 
 @section('container')
 
+    @if(count($provas)==0)
+    <h1>Sem provas! :(</h1>
+        <h4>começe clicando em Criar Prova.</h4>
+    @else
+
 
         <p class="row"></p>
 <div class="well">
     <div class="panel panel-default">
            <?php
         $excluir=0;
+
+
         foreach($provas as $prova){
                $prova = get_object_vars($prova);
                 $excluir++;
+
+        $qId = DB::table('questionnaire')
+                ->select('id')
+                ->where('token',$prova['token'])
+                ->get();
+            $qId = get_object_vars($qId['0']);
+        $badge = DB::table('answers')
+                ->select('id')
+                ->where('question_id',$qId['id'])
+                ->get();
+        $badge = count($badge);
 
                ?><div class="list-group-item btn btn-default">
                        <div class="row">
@@ -34,7 +52,7 @@ Olá {!! Auth::user() -> name !!}
 
                            <div class="col-md-4 col-sm-6 visible-md-block visible-lg-block visible-sm-block"><a href="{!! url('new/'.$prova['token']) !!}">Prova: <?php echo $prova['name'];?></a></div>
                            <div class="col-md-2 col-sm-6 visible-md-block visible-lg-block visible-sm-block"><p class="">Token: <?php echo $prova['token'];?></p></div>
-                           <div class="col-md-2 visible-md-block visible-lg-block "><a href="{!! url() !!}" class="glyphicon glyphicon-stats btn btn-default"> Respostas <span class="badge">0</span> </a></div>
+                           <div class="col-md-2 visible-md-block visible-lg-block "><a href="{!! url() !!}" class="glyphicon glyphicon-stats btn btn-default"> Respostas <span class="badge">{!! $badge !!}</span> </a></div>
                            <div class="col-md-2 visible-md-block visible-lg-block "><a href="{!! url('new/'.$prova['token'].'/edit') !!}" class="glyphicon glyphicon-pencil btn btn-default"> Editar</a></div>
                            <div class="col-md-1 col-xs-4 col-sm-4">
 
@@ -79,5 +97,5 @@ Olá {!! Auth::user() -> name !!}
 </div>
 
 
-
+@endif
 @stop

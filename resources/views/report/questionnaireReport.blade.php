@@ -1,4 +1,4 @@
-@extends('layouts.masterLogin')
+@extends('layouts.masterUser')
 @section('title')
     Aram App
 @stop
@@ -12,8 +12,6 @@
 
 @section('div2')
 
-    <h1>Pronto!</h1>
-    <h2>Sua prova foi enviada com sucesso!</h2>
 
 @stop
 

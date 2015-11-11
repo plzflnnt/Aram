@@ -56,7 +56,9 @@ class AnswerController extends Controller
     {
         //prova
         $input = Input::get('questions');
+        $inputSemJSON = $input;
         $input = " {\"test\":". $input."}";
+
 
         //token da prova
         $token = Input::get('token');
@@ -83,6 +85,8 @@ class AnswerController extends Controller
         $respostaMatriz = json_decode($test_ans);
 
         $contA = 0;
+        $c = 0;
+        $certasEErradas = [];
         foreach($resposta->test as $ans){
             $ans = get_object_vars($ans);
             $ansC = get_object_vars($respostaMatriz);
@@ -114,12 +118,17 @@ class AnswerController extends Controller
                     }
                     if($respondidas-$certa == 0) {
                         $contA++;
+                        $c++;
+                        $certasEErradas[$c]="certa";
+                    }else{
+                        $c++;
+                        $certasEErradas[$c]="errada";
                     }
                 }
             }
         }
 
-
+        $inputSemJSON = " {\"res\":\"".json_encode($certasEErradas)."\",\"test\":". $input."}";
 
         //nome do cliente
         $nomeDoAluno = Input::get('fname');
@@ -129,11 +138,16 @@ class AnswerController extends Controller
             [
                 'question_id' => $question_id['id'],
                 'name' => $nomeDoAluno,
-                'answers' => $input,
+                'answers' => $inputSemJSON,
                 'score' => $contA,
             ]
         );
-        return View::make('answer.ready');
+        if($c!=0){
+            $contA = ($contA * 100)/$c;
+        }else{
+            $contA = false;
+        }
+        return View::make('answer.ready')->withAcertos($contA);
     }
 
     public function destroy($id)

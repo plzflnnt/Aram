@@ -16,7 +16,7 @@
 
 
 
-        <p class="inputQ" style=" display: none">{!! $test["quest"] !!}</p>
+    <p class="inputQ" style=" display: none">{!! $test["quest"] !!}</p>
     <div class="quest">
 
 
