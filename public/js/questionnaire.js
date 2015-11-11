@@ -37,7 +37,7 @@ function delQuest(del) {
 
 function addAlt(add){
     contAlt[add]++;
-    var appd = $('<div class="'+add+' checkbox '+contAlt[add]+'"><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+add+','+contAlt[add]+')" >Remover alternativa</button></div>');
+    var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox "><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+add+','+contAlt[add]+')" >Remover alternativa</button></div>');
     var classe = (".checkbox"+add);
     $(classe).prepend(appd);
 
@@ -46,7 +46,7 @@ function addAlt(add){
 
 function delAlt(q, a){
 
-    var toDel = ("." + q + " checkbox " + a);
+    var toDel = (".q" + q + "a"+ a);
     $(toDel).remove();
 
 }

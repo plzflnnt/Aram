@@ -68,9 +68,11 @@ function restoreQuestions(){
             var retorno = jsonTest.test[i].enunciado;
             createQuestObj(retorno);
             var numDeAlternativas = jsonTest.test[i].resposta.length;
+            var x = numDeAlternativas;
             for (var y = 0; y < numDeAlternativas; y++){
-                var retornoAlt = jsonTest.test[i].resposta[y].txt;
-                var retornoCbx = jsonTest.test[i].resposta[y].alt;
+                x--;
+                var retornoAlt = jsonTest.test[i].resposta[x].txt;
+                var retornoCbx = jsonTest.test[i].resposta[x].alt;
                 createAlternativa(retornoAlt,i+1,retornoCbx);
             }
 

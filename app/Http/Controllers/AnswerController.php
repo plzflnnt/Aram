@@ -82,6 +82,7 @@ class AnswerController extends Controller
         $resposta = json_decode($input);
         $respostaMatriz = json_decode($test_ans);
 
+        $contA = 0;
         foreach($resposta->test as $ans){
             $ans = get_object_vars($ans);
             $ansC = get_object_vars($respostaMatriz);
@@ -94,21 +95,25 @@ class AnswerController extends Controller
                     //entra nas perguntas objetivas
                     $z = 0;
 
-
+                    $respondidas = 0;
+                    $certa = 0;
                     foreach ($ans['resposta'] as $alternativa) {
                         $alternativa = get_object_vars($alternativa);//o identificador é de cada alternativa
                         $resp = $ansC['resposta'];
                         $resp = get_object_vars($resp[$z]);
                         $z++;
 
-                        echo $resp['txt']." resposta";
-                        ?><br><br> <?php
-                        echo $alternativa['txt']." alternativa";
-                        ?><br><br> <?php
-
+                        //se estuver correta:
+                        if($resp['alt']==$alternativa['alt']){
+                            $respondidas++;
+                            $certa++;
+                        }else{
+                            $respondidas++;
+                        }
                         //chegou nas alternativas!
-
-
+                    }
+                    if($respondidas-$certa == 0) {
+                        $contA++;
                     }
                 }
             }
@@ -120,17 +125,15 @@ class AnswerController extends Controller
         $nomeDoAluno = Input::get('fname');
 
         //salva a resposta no banco
-//        DB::table('answers')->insert(
-//            [
-//                'question_id' => $question_id['id'],
-//                'name' => $nomeDoAluno,
-//                'answers' => $input,
-//                'score' => $score,
-//            ]
-//        );
-//        return View::make('answer.ready');
-//        return 'oi';
-
+        DB::table('answers')->insert(
+            [
+                'question_id' => $question_id['id'],
+                'name' => $nomeDoAluno,
+                'answers' => $input,
+                'score' => $contA,
+            ]
+        );
+        return View::make('answer.ready');
     }
 
     public function destroy($id)
