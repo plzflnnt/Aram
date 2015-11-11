@@ -92,14 +92,20 @@ class AnswerController extends Controller
             if($ansC['tipo'] == "objetiva") {
                 if ($ans['tipo'] == "objetiva") {
                     //entra nas perguntas objetivas
+                    $z = 0;
 
 
                     foreach ($ans['resposta'] as $alternativa) {
                         $alternativa = get_object_vars($alternativa);//o identificador é de cada alternativa
-                    echo $alternativa['txt'];
-                        ?><br> <?php
-                        var_dump($ansC);
-                        ?><br> <?php
+                        $resp = $ansC['resposta'];
+                        $resp = get_object_vars($resp[$z]);
+                        $z++;
+
+                        echo $resp['txt']." resposta";
+                        ?><br><br> <?php
+                        echo $alternativa['txt']." alternativa";
+                        ?><br><br> <?php
+
                         //chegou nas alternativas!
 
 
