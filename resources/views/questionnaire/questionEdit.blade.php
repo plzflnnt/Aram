@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="../../css/styleForm.css">
 @stop
 
-@section('container')
+@section('div2')
 
 
-{!! $id !!}
-
+<div class="row">
+    {!! $id !!}
+</div>
 
 
     {{--seleciona o tipo de questão--}}
@@ -26,7 +27,7 @@
     </div>
 
     <button class="btn btn-default col-md-2" onclick="createQuest()" >Nova</button>
-<br><br>
+
 <div class="quest">
 
 

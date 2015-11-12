@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../css/styleForm.css">
 @stop
 
-@section('div1')
+@section('div2')
 
 MODIFICA
     {!! $id !!}

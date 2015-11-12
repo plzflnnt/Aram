@@ -61,7 +61,7 @@
 {{--Estilo padrão--}}
 <div class="row">
     <div class="col-xs-1 col-md-2"></div>
-    <div name="ConteudoPrincipal" class="col-xs-4 col-md-6">@yield('div2')</div>
+    <div name="ConteudoPrincipal" class="col-md-6 col-xs-12 col-lg-5 col-sm-10 ">@yield('div2')</div>
     <div class="col-xs-1 col-md-2"></div>
 </div>
 

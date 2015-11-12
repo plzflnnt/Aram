@@ -10,13 +10,12 @@
     </ul>
 @stop
 
-@section('div2')
+@section('div1')
 
+    <div class="col-xs-1 col-md-2"></div>
+    <div name="ConteudoPrincipal" class="col-md-6 col-xs-12 col-lg-5 col-sm-10 ">
 
-
-
-
-    <p class="inputQ" style=" display: none">{!! $test["quest"] !!}</p>
+    <p class="inputQ" style=" display: none">{!! $id['answers'] !!}</p>
     <div class="quest">
 
 
@@ -25,12 +24,17 @@
 
 
 
+    </div>
+    <div class="col-xs-1 col-md-2">
 
+        <h1>Acertou {!! $id['score'] !!}% das perguntas objetivas</h1>
+
+    </div>
 
 
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 
-    <script src="../../js/answerTest.js"></script>
+    <script src="../../js/reportRestore.js"></script>
 
 
     {{--<p class="inputQ" style=" display: none">{!! $test["quest"] !!}</p><br>--}}

@@ -2,6 +2,7 @@
 
 namespace Aram\Http\Controllers;
 
+use Aram\Answers;
 use Aram\User;
 use Illuminate\Http\Request;
 use Aram\Http\Requests;
@@ -44,7 +45,32 @@ class AnswerController extends Controller
 
     public function show($id)
     {
-        //
+        $tests = DB::table('questionnaire')
+            ->select('id')
+            ->where('token',$id)
+            ->get();
+        $tests = get_object_vars($tests['0']);
+        $tests = $tests['id'];
+
+        $nomeProva = DB::table('questionnaire')
+            ->select('name')
+            ->where('token',$id)
+            ->get();
+        $nomeProva = get_object_vars($nomeProva['0']);
+        $nomeProva = $nomeProva['name'];
+
+
+        $anss = DB::table('answers')
+            ->select('answers')
+            ->where('question_id',$tests)
+            ->get();
+
+        $nomes = DB::table('answers')
+            ->select('*')
+            ->where('question_id',$tests)
+            ->paginate(20);
+
+        return View::make('report.questionnaireReport')->withToken($id)->withTests($anss)->withNomes($nomes)->withProva($nomeProva);
     }
 
     public function edit($id)
@@ -119,34 +145,40 @@ class AnswerController extends Controller
                     if($respondidas-$certa == 0) {
                         $contA++;
                         $c++;
-                        $certasEErradas[$c]="certa";
+                        $certasEErradas['q'.$c]="certa";
                     }else{
                         $c++;
-                        $certasEErradas[$c]="errada";
+                        $certasEErradas['q'.$c]="errada";
                     }
                 }
             }
         }
 
-        $inputSemJSON = " {\"res\":\"".json_encode($certasEErradas)."\",\"test\":". $input."}";
+        $inputSemJSON = " {\"res\":".json_encode($certasEErradas).",\"test\":". $input."}";
 
         //nome do cliente
         $nomeDoAluno = Input::get('fname');
 
-        //salva a resposta no banco
-        DB::table('answers')->insert(
-            [
-                'question_id' => $question_id['id'],
-                'name' => $nomeDoAluno,
-                'answers' => $inputSemJSON,
-                'score' => $contA,
-            ]
-        );
         if($c!=0){
             $contA = ($contA * 100)/$c;
         }else{
             $contA = false;
         }
+
+        //salva a resposta no banco
+//        DB::table('answers')->insert(
+//            [
+//                'question_id' => $question_id['id'],
+//                'name' => $nomeDoAluno,
+//                'answers' => $inputSemJSON,
+//                'score' => $contA,
+//            ]
+//
+        Answers::create(array('question_id' => $question_id['id'],
+                'name' => $nomeDoAluno,
+                'answers' => $inputSemJSON,
+                'score' => $contA,));
+
         return View::make('answer.ready')->withAcertos($contA);
     }
 

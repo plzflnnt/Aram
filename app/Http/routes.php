@@ -73,7 +73,19 @@ Route::get('setup', function() {
     return View::make('auth.userSetup');
 });
 
+//visualizar resultado de um aluno
+Route::get('resultado/{id}', function($id) {
 
+    $prova = DB::table('answers')
+        ->select('*')
+        ->where('id',$id)
+        ->get();
+    $prova = get_object_vars($prova['0']);
+
+//    var_dump($prova);
+
+    return View::make('report.answerReport')->withId($prova);
+});
 
 //logout
 Route::get('sair', function() {

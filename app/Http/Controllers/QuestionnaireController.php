@@ -2,6 +2,7 @@
 
 namespace Aram\Http\Controllers;
 
+use Aram\Questionnaire;
 use Aram\User;
 use Illuminate\Http\Request;
 use Aram\Http\Requests;
@@ -44,16 +45,23 @@ class questionnaireController extends Controller
         if($validator->fails()) return Redirect::to('new')
             ->withInput()
             ->withErrors($validator);
+        $request = $request->input('name');
 
-        DB::table('questionnaire')->insert(
-            [
-                'name' => $request->input('name'),
+        Questionnaire::create(array('name' => $request,
                 'token' => $token,
                 'user_id' => $id,
                 'public' => true,
-                'quest' => "sv",
-            ]
-        );
+                'quest' => "sv",));
+
+//        DB::table('questionnaire')->insert(
+//            [
+//                'name' => $request->input('name'),
+//                'token' => $token,
+//                'user_id' => $id,
+//                'public' => true,
+//                'quest' => "sv",
+//            ]
+//        );
         return Redirect::to('new/'.$token.'/edit');
     }
 
@@ -105,10 +113,14 @@ class questionnaireController extends Controller
         $input = " {\"name\":\"".$nomeDaProva['name']."\",\"test\":". $input."}";
 
         $userId = Auth::id();
-        DB::table('questionnaire')
-                        ->where('user_id', $userId)
+
+        Questionnaire::where('user_id', $userId)
                         ->where('token', $id)
                         ->update(['quest' => $input]);
+//        DB::table('questionnaire')
+//                        ->where('user_id', $userId)
+//                        ->where('token', $id)
+//                        ->update(['quest' => $input]);
         return Redirect::to('login/create');
     }
 
