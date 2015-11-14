@@ -36,45 +36,16 @@
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{!!  url('/') !!}" style="font-family: 'Amatic SC', cursive ;">Aram app</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-           @yield('menu')
-            <form class="navbar-form navbar-right" action="{!! url('login') !!}" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="form-group">
-                    <input name="email" type="text" placeholder="E-mail" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input name="password" type="password" placeholder="Senha" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Entrar</button>
+<div class="col-xs-1 col-sm-2"></div>
 
-            </form>
-        </div><!--/.nav-collapse -->
-
-    </div>
-</nav>
-
+<div class="col-xs-10 col-sm-8">
 {{--Corpo personalizável--}}
 @yield('div1')
-
-
-{{--Estilo padrão--}}
-<div class="row">
-    <div class="col-xs-1 col-md-2"></div>
-    <div name="ConteudoPrincipal" class="col-md-6 col-xs-12 col-lg-5 col-sm-10 ">@yield('div2')</div>
-    <div class="col-xs-1 col-md-2"></div>
 </div>
+
+<div class="col-xs-1 col-sm-2"></div>
+
+@yield('div2')
 
 
 <!-- Bootstrap core JavaScript

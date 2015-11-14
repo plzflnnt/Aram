@@ -27,7 +27,7 @@
     </div>
     <div class="col-xs-1 col-md-2">
 
-        <h1>Acertou {!! $id['score'] !!}% das perguntas objetivas</h1>
+        <h1>Acertou {!! round($id['score'], $precision = 1) !!}% das perguntas objetivas</h1>
 
     </div>
 

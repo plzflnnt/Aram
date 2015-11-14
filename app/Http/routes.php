@@ -17,7 +17,7 @@ Route::resource('login','UserLoginController');
 //Rota para criar questionario
 Route::resource('new','QuestionnaireController');
 
-//Rota para postar JSON com as respostas
+//Rota para postar JSON com as respostas TODO
 Route::post('postJsonByToken', function(){
 //    $input = Input::get('token');
 //    $prova = DB::table('questionnaire')
@@ -29,7 +29,7 @@ Route::post('postJsonByToken', function(){
 //    return $prova;
 });
 
-//Rota para receber JSON com token na tela
+//Rota para receber JSON com token na tela TODO
 Route::get('getJsonByToken', function() {
 
     $input = Input::get('token');
@@ -64,9 +64,7 @@ Route::get('ajuda', function() {
 Route::get('legal', function() {
     return View::make('help.legal');
 });
-Route::get('legal', function() {
-    return View::make('help.legal');
-});
+
 
 //Configuração de usuário
 Route::get('setup', function() {
@@ -93,6 +91,23 @@ Route::get('sair', function() {
     return redirect('/');
 });
 
+Route::get('mobileanswer/{token}', function($token){
+    try{
+        $test = DB::table('questionnaire')
+            ->select('quest')
+            ->where('token',$token)//todo fazer a pagina de erro e terminar a view do ios
+            ->get();
+        $test = get_object_vars($test['0']);
+        return View::make('answer/newAnswerMobile')->withProva($test)->withToken($token);
+    }catch (\Exception $e){
+        return Redirect::to('erromobiletoken');
+    }
+});
+
+Route::get('erromobiletoken', function(){
+    return View::make('errors/erroMobileTokenNotFound');
+});
+
 
 //TODO:fazer a edição dos formulários já existentes
 //TODO:não está salvando os timestamps dos questionários
@@ -102,3 +117,5 @@ Route::get('sair', function() {
 //TODO: arrumar ROUTES  pois o app só faz requisição GET
 //TODO: prova ativa para responder ou não
 //TODO: aspas duplas estragam a prova
+//TODO: só ta pegando o nome do aluno quando ele faz a prova não o resto
+//TODO: fazer aparecer o nome do da prova e do professor que criou!
