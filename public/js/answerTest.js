@@ -28,10 +28,10 @@ function createQuestObj(valueObj){
 
 function createAlternativa(valueAlt,add,valueCbx){
 
-        contAlt[add]++;
-        var appd = $('<div class="row"><div class="col-lg-12"><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="checkbox" aria-label="..."></span><p class="form-control" name="texto" aria-label="...">'+valueAlt+'</p></div><!-- /input-group --></div>');
-        var classe = (".checkbox"+add);
-        $(classe).prepend(appd);
+    contAlt[add]++;
+    var appd = $('<div class="row"><div class="col-lg-12"><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="checkbox" aria-label="..."></span><p class="well" name="texto" aria-label="..." style="margin-bottom: 0px !important;">'+valueAlt+'</p></div><!-- /input-group --></div>');
+    var classe = (".checkbox"+add);
+    $(classe).prepend(appd);
 }
 
 function makeJSON(){

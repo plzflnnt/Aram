@@ -1,7 +1,7 @@
 body {
     padding-top: 50px;
     /*background-color: #9acfea;*/
-    /*background-image: url("../img/images.png");*/
+    /*background-image: url("../img/logoweb.png");*/
     /*background-size: 100%;*/
     /*background-repeat: repeat ;*/
 
@@ -9,4 +9,8 @@ body {
 .starter-template {
     padding: 40px 15px;
     text-align: center;
+}
+.jumbotron{
+    background-image: url("../img/logoweb.png");
+    background-size: 100%;
 }

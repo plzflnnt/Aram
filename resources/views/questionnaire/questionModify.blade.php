@@ -17,7 +17,9 @@ MODIFICA
 
 
     {{--seleciona o tipo de questão--}}
-    <div class="radio">
+<div class="row well">
+    {{--seleciona o tipo de questão--}}
+    <div class="radio col-md-6">
         <label>
             <input type="radio" name="optionsRadios" id="discursiva" value="option1" checked>
             Discursiva
@@ -28,7 +30,9 @@ MODIFICA
         </label>
     </div>
 
-    <button class="btn btn-default" onclick="createQuest()" >Nova</button>
+    <button class="btn btn-default col-md-2" onclick="createQuest()" >Nova</button>
+
+</div>
 
     <div class="quest">
 

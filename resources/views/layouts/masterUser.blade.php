@@ -45,7 +45,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{!!  url('/') !!}" style="font-family: 'Amatic SC', cursive ;">Aram app</a>
+            <img class="navbar-brand" href="{!!  url('/') !!}" src="../../img/logotexto.png" alt="">
+            {{--<a class="navbar-brand" href="{!!  url('/') !!}" style="font-family: 'Amatic SC', cursive ;">Aram app</a>--}}
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             @yield('menu')
@@ -67,6 +68,9 @@
 
 <div class="container">@yield('container')</div>
 
+<div class="row">
+    <h5 class="text-center">&copy Copyright Zafalon.com - Todos os direitos reservados. <a href="{!! url('legal') !!}">Termos e Privacidade</a></h5>
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

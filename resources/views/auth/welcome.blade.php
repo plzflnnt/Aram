@@ -1,6 +1,6 @@
 @extends('layouts.masterLogin')
 @section('title')
-    ARAM - Escola do agora!
+    Aram App Início
 @stop
 
 @section('menu')
@@ -21,20 +21,28 @@
         <div class="row">
             <div name="download-app" class="col-xs-12 col-sm-7 col-md-8" style="padding: 20px">
                 <div class="jumbotron">
-                    <h1>Responda sua prova Aram!</h1>
+                    <h2>Acessar atividade:</h2>
+
+
+                    {!!  Form::open(array('url' => 'responder', 'method' => 'post'))  !!}
+                    <div class="input-group">
+                        <input type="text" name="token" class="form-control" placeholder="Insira o token da atividade">
+                         <span class="input-group-btn">
+                            <button class="btn btn-default"  type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                         </span>
+                    </div><!-- /input-group -->
+                    {!! Form::close() !!}
+
+
+                    <br>
+                    <br>
                     <p>Responda suas provas também no seu iPhone, iPad ou Android através do aplicativo</p>
-                    <p><div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Responder <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">iPhone/ iPad</a></li>
-                            <li><a href="#">Android</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{!! url('responder') !!}">Responder agora</a></li>
-                        </ul>
-                    </div></p>
+                    <img src="../../img/appstore.png" style="width: 150px !important;">
+                    <img src="../../img/play.png" style="width: 130px !important;">
                 </div>
+
+                <br>
+
             </div>
             <div class="col-xs-12 visible-xs-block glyphicon-align-center"><span class="glyphicon-align-center glyphicon glyphicon-chevron-down"></span></div>
 

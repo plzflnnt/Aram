@@ -11,11 +11,12 @@
 @stop
 
 @section('div2')
-
+    <br>
+    <p>Por enquanto ainda não é possível alterar os dados dos usuários, em breve esta função estará disponível</p>
+    <br><br><br><br>
 
     <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#myModal">Encerrar conta</button>
-
-
+    <br><br>
 
 
 

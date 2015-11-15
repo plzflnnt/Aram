@@ -33,9 +33,8 @@ class questionnaireController extends Controller
 
         //CRIA UM TOKEN PARA A PROVA
         $id = Auth::id();
-        $tokenCru = uniqid(rand(), true);
-        $token = dechex($tokenCru);
-
+        $tokenCru = rand (1000,9999);
+        $token = dechex($tokenCru).$id;
        $rules = array(
             'name' => 'required',
         );
@@ -45,12 +44,19 @@ class questionnaireController extends Controller
         if($validator->fails()) return Redirect::to('new')
             ->withInput()
             ->withErrors($validator);
+        $public = $request->input('public');
         $request = $request->input('name');
+        if($public==null){
+            $public = false;;
+        }else{
+            $public = true;
+        }
+
 
         Questionnaire::create(array('name' => $request,
                 'token' => $token,
                 'user_id' => $id,
-                'public' => true,
+                'public' => $public,
                 'quest' => "sv",));
 
 //        DB::table('questionnaire')->insert(

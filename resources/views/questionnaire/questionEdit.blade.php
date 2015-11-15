@@ -13,7 +13,7 @@
     {!! $id !!}
 </div>
 
-
+<div class="row well">
     {{--seleciona o tipo de questão--}}
     <div class="radio col-md-6">
         <label>
@@ -28,11 +28,14 @@
 
     <button class="btn btn-default col-md-2" onclick="createQuest()" >Nova</button>
 
-<div class="quest">
-
-
 </div>
 
+<div class="row">
+    <div class="quest">
+
+
+    </div>
+</div>
     {{--formulário aram--}}
 
     {!!Form::open(array('url'=>'new/'.$id, 'method' => 'PUT', 'id'=> 'qid'))!!}

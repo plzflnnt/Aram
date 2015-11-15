@@ -9,7 +9,7 @@ var contAlt = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 function createQuest(){
     if(document.getElementById('discursiva').checked) {
 
-        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><input type="hidden" name="'+cont+'resposta" value=""></div>');
+        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><span>Enunciado:</span><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="delQuest('+cont+')" ></button><input type="hidden" name="'+cont+'resposta" value=""></div>');
         $(".quest").append(appd);
         cont++;
 
@@ -18,7 +18,7 @@ function createQuest(){
 
     else if(document.getElementById('objetiva').checked) {
 
-        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><label>Questão '+cont+' -</label><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default" onclick="delQuest('+cont+')" >Remover pergunta</button><button type="button" class="btn btn-default" onclick="addAlt('+cont+')" >Adicionar alternativa</button><div class="checkbox'+cont+'"></div></div>');
+        var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><span>Enunciado:</span><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="delQuest('+cont+')" ></button><button type="button" class="btn btn-default glyphicon glyphicon glyphicon-list" onclick="addAlt('+cont+')" > Add <span class="glyphicon glyphicon-plus"></span> alternativa</button><div class="checkbox'+cont+'"></div></div>');
         $(".quest").append(appd);
         cont++;
     }
@@ -37,7 +37,7 @@ function delQuest(del) {
 
 function addAlt(add){
     contAlt[add]++;
-    var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox "><label><input name="'+add+'alternativa'+contAlt[add]+'checkbox"type="checkbox"> Alternativa '+contAlt[add]+'</label><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"><button type="button" class="btn btn-default" onclick="delAlt('+add+','+contAlt[add]+')" >Remover alternativa</button></div>');
+    var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox input-group "><span class="input-group-addon"><input name="'+add+'alternativa'+contAlt[add]+'checkbox" type="checkbox" style="margin-left: 0px;" >.    .</span><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"> <span class="input-group-btn"><button type="button" style="border-top-width: 0px;" class="btn btn-default glyphicon glyphicon-remove" onclick="delAlt('+add+','+contAlt[add]+')" ></button></span></div>');
     var classe = (".checkbox"+add);
     $(classe).prepend(appd);
 

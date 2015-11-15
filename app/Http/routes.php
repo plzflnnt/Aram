@@ -1,5 +1,7 @@
 <?php
 use Aram\User;
+use Aram\Questionnaire;
+
 //Rota para página inicial
 Route::get('/', function(){
     if (Auth::check()) {
@@ -106,6 +108,40 @@ Route::get('mobileanswer/{token}', function($token){
 
 Route::get('erromobiletoken', function(){
     return View::make('errors/erroMobileTokenNotFound');
+});
+
+Route::get('publicactivities', function(){
+    $provas = DB::table('questionnaire')
+        ->where('public', true)
+        ->paginate(6);
+
+    return View::make('questionnaire/publicQuestionnaires')->withProvas($provas);
+});
+
+Route::get('copyactivity/{token}', function($tokenProva){
+    $prova = DB::table('questionnaire')
+        ->select('*')
+        ->where('token', $tokenProva)
+        ->get();
+
+    $prova = get_object_vars($prova['0']);
+    $nome = $prova['name'];
+    $prova = $prova['quest'];
+
+
+    //CRIA UM TOKEN PARA A PROVA
+    $id = Auth::id();
+    $tokenCru = rand (1000,9999);
+    $token = dechex($tokenCru).$id;
+
+
+    Questionnaire::create(array('name' => $nome,
+        'token' => $token,
+        'user_id' => $id,
+        'public' => true,
+        'quest' =>$prova,));
+
+    return Redirect::to('login/create');
 });
 
 
