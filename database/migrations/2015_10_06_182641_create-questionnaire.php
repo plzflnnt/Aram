@@ -19,6 +19,7 @@ class CreateQuestionnaire extends Migration
             $table->string('name');
             $table->integer('token')->unique();
             $table->boolean('public');
+            $table->boolean('active');
             $table->integer('quest');
             $table->timestamps();
         });

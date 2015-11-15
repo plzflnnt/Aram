@@ -16,7 +16,7 @@ Route::resource('signup','UsersController');
 //Rota para fazer login
 Route::resource('login','UserLoginController');
 
-//Rota para criar questionario
+//Rota para criar atividade
 Route::resource('new','QuestionnaireController');
 
 //Rota para postar JSON com as respostas TODO
@@ -70,11 +70,21 @@ Route::get('legal', function() {
 
 //Configuração de usuário
 Route::get('setup', function() {
+
+
+    if (Auth::check()) {
+
     return View::make('auth.userSetup');
+
+    }
+    return View::make('auth.welcome');
 });
 
 //visualizar resultado de um aluno
 Route::get('resultado/{id}', function($id) {
+
+    if (Auth::check()) {
+
 
     $prova = DB::table('answers')
         ->select('*')
@@ -85,12 +95,21 @@ Route::get('resultado/{id}', function($id) {
 //    var_dump($prova);
 
     return View::make('report.answerReport')->withId($prova);
+
+    }
+    return View::make('auth.welcome');
 });
 
 //logout
 Route::get('sair', function() {
+
+    if (Auth::check()) {
+
     Auth::logout();
     return redirect('/');
+
+    }
+    return View::make('auth.welcome');
 });
 
 Route::get('mobileanswer/{token}', function($token){
@@ -110,15 +129,26 @@ Route::get('erromobiletoken', function(){
     return View::make('errors/erroMobileTokenNotFound');
 });
 
+//lida com o repositório de atividades
 Route::get('publicactivities', function(){
+
+    if (Auth::check()) {
+
     $provas = DB::table('questionnaire')
         ->where('public', true)
         ->paginate(6);
 
     return View::make('questionnaire/publicQuestionnaires')->withProvas($provas);
+
+    }
+    return View::make('auth.welcome');
 });
 
 Route::get('copyactivity/{token}', function($tokenProva){
+
+
+    if (Auth::check()) {
+
     $prova = DB::table('questionnaire')
         ->select('*')
         ->where('token', $tokenProva)
@@ -142,16 +172,21 @@ Route::get('copyactivity/{token}', function($tokenProva){
         'quest' =>$prova,));
 
     return Redirect::to('login/create');
+
+
+    }
+    return View::make('auth.welcome');
 });
 
 
-//TODO:fazer a edição dos formulários já existentes
-//TODO:não está salvando os timestamps dos questionários
-//TODO:fazer a verificação de usuário logado nas páginas internas
-//TODO:fazer os layouts das paginas em que o a pessoa está logada e não está
+//TODO: fazer a verificação de usuário logado nas páginas internas
+//TODO: fazer os layouts das paginas em que o a pessoa está logada e não está
 //TODO: na página newQuest fazer uma instrução de como criar um formulário
-//TODO: arrumar ROUTES  pois o app só faz requisição GET
 //TODO: prova ativa para responder ou não
 //TODO: aspas duplas estragam a prova
 //TODO: só ta pegando o nome do aluno quando ele faz a prova não o resto
 //TODO: fazer aparecer o nome do da prova e do professor que criou!
+//TODO: editar nome da prova
+//TODO: Editar se é publico ou não
+
+

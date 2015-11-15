@@ -20,21 +20,39 @@ class questionnaireController extends Controller
 
     public function index()
     {
+
+        if (Auth::check()) {
+
         return Redirect::to('login/create');
+
+        }
+        return View::make('auth.welcome');
     }
 
     public function create()
     {
+
+        if (Auth::check()) {
+
         return View::make('questionnaire.newQuest');
+
+        }
+        return View::make('auth.welcome');
     }
 
     public function store(Request $request)
     {
 
+
+        if (Auth::check()) {
+
         //CRIA UM TOKEN PARA A PROVA
         $id = Auth::id();
+        $characters = 'abcdefghijklmnopqrstuvwxyz';
+        $alpha = '';
+        $alpha .= $characters[mt_rand(0, 25)];
         $tokenCru = rand (1000,9999);
-        $token = dechex($tokenCru).$id;
+        $token = dechex($tokenCru).$alpha.$id;
        $rules = array(
             'name' => 'required',
         );
@@ -69,10 +87,16 @@ class questionnaireController extends Controller
 //            ]
 //        );
         return Redirect::to('new/'.$token.'/edit');
+
+        }
+        return View::make('auth.welcome');
     }
 
     public function show($id)
     {
+
+        if (Auth::check()) {
+
         $test = DB::table('questionnaire')
             ->select('quest')
             ->where('token',$id)
@@ -80,10 +104,16 @@ class questionnaireController extends Controller
         $test = get_object_vars($test['0']);
         return View::make('questionnaire.visualizeQuestionnaire')->withTest($test);
 
+        }
+        return View::make('auth.welcome');
+
     }
 
     public function edit($id)
     {
+
+        if (Auth::check()) {
+
 
         //teste se a prova já existe
 
@@ -105,10 +135,16 @@ class questionnaireController extends Controller
             ->get();
         $prova = get_object_vars($prova['0']);
             return View::make('questionnaire.questionModify')->withId($id)->withProva($prova);
+
+        }
+        return View::make('auth.welcome');
     }
 
     public function update(Request $request, $id)
     {
+
+        if (Auth::check()) {
+
         $nomeDaProva = DB::table('questionnaire')
                         ->select('name')
                         ->where('token',$id)
@@ -128,14 +164,24 @@ class questionnaireController extends Controller
 //                        ->where('token', $id)
 //                        ->update(['quest' => $input]);
         return Redirect::to('login/create');
+
+        }
+        return View::make('auth.welcome');
     }
 
     public function destroy($id)
     {
+
+
+        if (Auth::check()) {
+
         DB::table('questionnaire')
             ->where('token',$id)
             ->delete();
         return Redirect::to('login/create');
+
+        }
+        return View::make('auth.welcome');
 
     }
 }
