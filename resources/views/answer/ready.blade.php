@@ -13,15 +13,18 @@
 @section('div2')
 
     @if($acertos == false)
-
-        <h1>Tudo certo!</h1>
-        <h3>Até logo :)</h3>
-
+<div class="jumbotron">
+    <br>
+        <h1 class="text-center">Tudo certo!</h1>
+        <h3 class="text-center">Até logo :)</h3>
+</div>
         @else
-
-    <h1>Pronto!</h1>
-    <h2>Sua prova foi enviada com sucesso!</h2>
-    <h2>Acertou: {!! round($acertos, $precision = 1) !!}%</h2>
+        <div class="jumbotron">
+        <br>
+            <h1 class="text-center">Pronto!</h1>
+            <h2 class="text-center">Sua prova foi enviada com sucesso!</h2>
+            <h2 class="text-center">Acertou: {!! round($acertos, $precision = 1) !!}% das objetivas.</h2>
+        </div>
 @endif
 @stop
 

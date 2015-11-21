@@ -184,4 +184,8 @@ class questionnaireController extends Controller
         return View::make('auth.welcome');
 
     }
+
+    public function oi(){
+        return "oi";
+    }
 }

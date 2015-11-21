@@ -3,7 +3,7 @@ use Aram\User;
 use Aram\Questionnaire;
 
 //Rota para página inicial
-Route::get('/', function(){
+ Route::get('/', function(){
     if (Auth::check()) {
         return Redirect::to('login/create');
     }
@@ -179,7 +179,7 @@ Route::get('copyactivity/{token}', function($tokenProva){
 });
 
 
-//TODO: fazer a verificação de usuário logado nas páginas internas
+//TODO: v fazer a verificação de usuário logado nas páginas internas
 //TODO: fazer os layouts das paginas em que o a pessoa está logada e não está
 //TODO: na página newQuest fazer uma instrução de como criar um formulário
 //TODO: prova ativa para responder ou não
@@ -188,5 +188,5 @@ Route::get('copyactivity/{token}', function($tokenProva){
 //TODO: fazer aparecer o nome do da prova e do professor que criou!
 //TODO: editar nome da prova
 //TODO: Editar se é publico ou não
-
+//TODO: Fazer mensagens de erro de login e criação de conta
 

@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <img class="navbar-brand" href="{!!  url('/') !!}" src="../../img/logotexto.png" alt="">
+            <a href="{!! url('/') !!}"><img class="navbar-brand" src="../../img/logotexto.png" alt=""></a>
             {{--<a class="navbar-brand" href="{!!  url('/') !!}" style="font-family: 'Amatic SC', cursive ;">Aram app</a>--}}
         </div>
         <div id="navbar" class="collapse navbar-collapse">

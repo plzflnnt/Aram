@@ -82,6 +82,7 @@ class AnswerController extends Controller
     {
         //prova
         $input = Input::get('questions');
+        $device = Input::get('device');
         $inputSemJSON = $input;
         $input = " {\"test\":". $input."}";
 
@@ -179,6 +180,9 @@ class AnswerController extends Controller
                 'answers' => $inputSemJSON,
                 'score' => $contA,));
 
+        if ($device == "mobile"){
+            return View::make('answer.readyMobile')->withAcertos($contA);
+        }
         return View::make('answer.ready')->withAcertos($contA);
     }
 

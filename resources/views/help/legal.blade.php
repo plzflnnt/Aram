@@ -18,6 +18,8 @@
         <p>Aram é um projeto gratuito sem fins lucrativos com objetivos acadêmicos visando desenvolvimento de um projeto de software web e mobile.</p>
         <p>Os dados publicados neste site não são compartilhados entre outros usuários do Aram.</p>
         <p>Este mesmos dados podem ser utilizados para fins acadêmicos ou comerciais sem aviso prévio</p>
+        <p>Aram usa cookies para manter-se logado em seu navegador, assim é necessário fazer logout manualmente para encerrar a sessão. Veja:
+            <a href="#">Fazer logout de todos os dispositivos conectados.</a></p>
         <p>Aram é baseado em Laravel e Twitter Bootstrap </p>
         <p>Laravel is a trademark of Taylor Otwell. Copyright © Taylor Otwell.</p>
         <p> The MIT License (MIT)</p>

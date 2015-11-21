@@ -37,8 +37,9 @@
                     <br>
                     <br>
                     <p>Responda suas provas também no seu iPhone, iPad ou Android através do aplicativo</p>
-                    <img src="../../img/appstore.png" style="width: 150px !important;">
-                    <img src="../../img/play.png" style="width: 130px !important;">
+                    <a href="#"><img src="../../img/appstore.png" style="width: 170px !important;"></a>
+                    <img src="../../img/play.png" style="width: 150px !important;">
+                    {{--(Em breve)--}}
                 </div>
 
                 <br>
@@ -49,7 +50,7 @@
             <div name="criar-conta" class="col-xs-12 col-sm-5 col-md-4" style="padding: 30px;">
 
                 <h3>Professor</h3>
-                <h5>cadastre-se para criar sua prova.</h5>
+                <h5>Cadastre-se para criar sua prova.</h5>
                 <form action="{!! url('signup') !!}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">

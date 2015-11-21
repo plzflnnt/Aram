@@ -67,7 +67,7 @@ class UserLoginController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         );
-        if(Auth::attempt($credenciais)){
+        if(Auth::attempt($credenciais,true)){
             $request=null;
             return Redirect::intended('login/create');
         }

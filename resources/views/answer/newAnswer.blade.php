@@ -44,6 +44,7 @@
                             <input type="text" class="form-control" placeholder="Nome" name="fname">
                             <input type="text" class="form-control" placeholder="Informaçoes extras. Ex.: Turma, série, etc...">
                             <input type="hidden" name="token" value="{!! $token !!}">
+                            <input type="hidden" name="device" value="browser">
                             <input type="hidden" name="questions">
                             <button type="submit" onclick="makeJSON()" class="oi btn btn-default col-md-12"><span class="glyphicon glyphicon-send"></span> Enviar</button>
                         </p>
