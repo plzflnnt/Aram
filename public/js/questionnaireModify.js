@@ -28,7 +28,7 @@ function createQuest(){
 
 
 function createQuestDisc(valueDisc){
-    var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><span>Enunciado:</span><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="delQuest('+cont+')" ></button><input type="hidden" name="'+cont+'resposta" value=""></div>');
+    var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="discursiva"><span>Enunciado:</span><input type="text" class="form-control" value="'+valueDisc+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="delQuest('+cont+')" ></button><input type="hidden" name="'+cont+'resposta" value=""></div>');
         $(".quest").append(appd);
         cont++;
 }
@@ -36,7 +36,7 @@ function createQuestDisc(valueDisc){
 
 
 function createQuestObj(valueObj){
-    var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><span>Enunciado:</span><input type="text" class="form-control" name="'+cont+'enunciado"><button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="delQuest('+cont+')" ></button><button type="button" class="btn btn-default glyphicon glyphicon glyphicon-list" onclick="addAlt('+cont+')" > Add <span class="glyphicon glyphicon-plus"></span> alternativa</button><div class="checkbox'+cont+'"></div></div>');
+    var appd = $('<div class="q'+cont+' well"><div class="form-group"><input type="hidden" name="'+cont+'tipo" value="objetiva"><span>Enunciado:</span><input type="text" class="form-control" value="'+valueObj+'" name="'+cont+'enunciado"><button type="button" class="btn btn-default glyphicon glyphicon-trash" onclick="delQuest('+cont+')" ></button><button type="button" class="btn btn-default glyphicon glyphicon glyphicon-list" onclick="addAlt('+cont+')" > Add <span class="glyphicon glyphicon-plus"></span> alternativa</button><div class="checkbox'+cont+'"></div></div>');
     $(".quest").append(appd);
     cont++;
 }
@@ -64,13 +64,13 @@ function createAlternativa(valueAlt,add,valueCbx){
 
     if(valueCbx==true){
         contAlt[add]++;
-        var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox input-group "><span class="input-group-addon"><input name="'+add+'alternativa'+contAlt[add]+'checkbox" type="checkbox" style="margin-left: 0px;" >.    .</span><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"> <span class="input-group-btn"><button type="button" style="border-top-width: 0px;" class="btn btn-default glyphicon glyphicon-remove" onclick="delAlt('+add+','+contAlt[add]+')" ></button></span></div>');
+        var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox input-group "><span class="input-group-addon"><input name="'+add+'alternativa'+contAlt[add]+'checkbox" type="checkbox" style="margin-left: 0px;" checked>.    .</span><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto" value="'+valueAlt+'"> <span class="input-group-btn"><button type="button" style="border-top-width: 0px;" class="btn btn-default glyphicon glyphicon-remove" onclick="delAlt('+add+','+contAlt[add]+')" ></button></span></div>');
         var classe = (".checkbox"+add);
         $(classe).prepend(appd);
     }else{
         contAlt[add]++;
         contAlt[add]++;
-        var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox input-group "><span class="input-group-addon"><input name="'+add+'alternativa'+contAlt[add]+'checkbox" type="checkbox" style="margin-left: 0px;" >.    .</span><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto"> <span class="input-group-btn"><button type="button" style="border-top-width: 0px;" class="btn btn-default glyphicon glyphicon-remove" onclick="delAlt('+add+','+contAlt[add]+')" ></button></span></div>');
+        var appd = $('<div class="q'+add+'a'+contAlt[add]+' checkbox input-group "><span class="input-group-addon"><input name="'+add+'alternativa'+contAlt[add]+'checkbox" type="checkbox" style="margin-left: 0px;" >.    .</span><input type="text" class="form-control" name="'+add+'alternativa'+contAlt[add]+'texto value="'+valueAlt+'""> <span class="input-group-btn"><button type="button" style="border-top-width: 0px;" class="btn btn-default glyphicon glyphicon-remove" onclick="delAlt('+add+','+contAlt[add]+')" ></button></span></div>');
         var classe = (".checkbox"+add);
         $(classe).prepend(appd);
     }

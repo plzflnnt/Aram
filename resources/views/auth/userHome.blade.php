@@ -6,8 +6,8 @@ Olá {!! Auth::user() -> name !!}
 @section('menu')
     <ul class="nav navbar-nav">
         <li class="active" ><a href="{!! url('/') !!}">Início</a></li>
-        <li><a href="{!! url('new/create') !!}">Criar Prova</a></li>
-        <li><a href="{!! url('publicactivities') !!}">Repositório de provas</a></li>
+        <li><a href="{!! url('new/create') !!}">Criar atividade</a></li>
+        <li><a href="{!! url('publicactivities') !!}">Repositório de atividades</a></li>
 
 
         <li><div class="dropdown">
@@ -29,7 +29,7 @@ Olá {!! Auth::user() -> name !!}
 
     @if(count($provas)==0)
     <h1>Sem provas! :(</h1>
-        <h4>começe clicando em Criar Prova.</h4>
+        <h4>começe clicando em Criar Atividade.</h4>
     @else
 
 

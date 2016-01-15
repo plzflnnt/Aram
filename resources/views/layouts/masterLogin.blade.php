@@ -81,6 +81,8 @@
 <div class="row">
     <h5 class="text-center">&copy Copyright Zafalon.com - Todos os direitos reservados. <a href="{!! url('legal') !!}">Termos e Privacidade</a></h5>
 </div>
+<div class="row text-center">Versão {!! Config::get('constants.VER') !!}</div>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
